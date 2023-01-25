@@ -7,7 +7,7 @@ in
 {
   source-code = stdenv.mkDerivation {
     name = "sabredav-ld";
-    src = /home/tim/workspace/linkeddata/sabredav-ld;
+    src = ./.;
     phases = [ "installPhase" ];
     installPhase = ''
       mkdir $out
