@@ -7,6 +7,6 @@ stdenv.mkDerivation {
   phases = [ "installPhase" ];
   installPhase = ''
     mkdir $out
-    cp $src/index.php $out/
+    cp $src/index.php $out
   '';
 }
