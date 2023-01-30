@@ -1,12 +1,14 @@
-{ pkgs ? import <nixpkgs> {} }:
+{pkgs ? import <nixpkgs> {
+    inherit system;
+  }, system ? builtins.currentSystem, noDev ? false, php ? pkgs.php, phpPackages ? pkgs.phpPackages}:
 
-with pkgs;
-stdenv.mkDerivation {
-  name = "sabredav-ld";
-  src = ./.;
-  phases = [ "installPhase" ];
-  installPhase = ''
-    mkdir $out
-    cp $src/index.php $out
-  '';
+let
+  composerEnv = import ./composer-env.nix {
+    inherit (pkgs) stdenv lib writeTextFile fetchurl unzip;
+    inherit php phpPackages;
+  };
+in
+import ./php-packages.nix {
+  inherit composerEnv noDev;
+  inherit (pkgs) fetchurl fetchgit fetchhg fetchsvn;
 }

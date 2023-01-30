@@ -1,0 +1,6 @@
+{
+  "name": "com.timmciver/sabredav-ld",
+  "require": {
+    "sabre/dav": "~3.2.0"
+  }
+}
